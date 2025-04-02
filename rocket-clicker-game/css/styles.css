@@ -22,6 +22,12 @@ body {
     padding: 20px;
     transition: left 0.3s ease;
 }
+
+/* Shop opens when 'open' class is added */
+#shop.open {
+    left: 0;
+}
+
 .shop-item {
     margin: 10px 0;
     padding: 10px;
@@ -50,3 +56,4 @@ body {
     color: white;
     cursor: pointer;
 }
+
