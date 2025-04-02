@@ -1,12 +1,11 @@
 let count = 0;
 let pointsPerClick = 1;
 let autoClickers = 0;
-let doublePointsPurchased = 0;
 const maxPurchases = 50;
 
 const counter = document.getElementById("counter");
 const rocket = document.getElementById("rocket");
-const buyDoublePoints = document.getElementById("buyDoublePoints");
+const buyMorePerClick = document.getElementById("buyDoublePoints");
 const buyAutoClicker = document.getElementById("buyAutoClicker");
 const shop = document.getElementById("shop");
 const shopToggle = document.getElementById("shopToggle");
@@ -21,7 +20,7 @@ function updateCounter() {
 
 // Check if items in the shop can be purchased
 function checkShopItems() {
-    buyDoublePoints.disabled = count < 50 || doublePointsPurchased >= maxPurchases;
+    buyMorePerClick.disabled = count < 50 || buyMorePerClick >= maxPurchases;
     buyAutoClicker.disabled = count < 100 || autoClickers >= maxPurchases;
 }
 
@@ -32,11 +31,11 @@ rocket.addEventListener("click", () => {
 });
 
 // Purchase Double Points
-buyDoublePoints.addEventListener("click", () => {
-    if (count >= 50 && doublePointsPurchased < maxPurchases) {
+buyMorePerClick.addEventListener("click", () => {
+    if (count >= 50 && buyMorePerClick < maxPurchases) {
         count -= 50;
         pointsPerClick *= 2; // Double the points per click
-        doublePointsPurchased++;
+        buyMorePerClick++;
         doublePointsCount.textContent = `${doublePointsPurchased}/50`;
         updateCounter();
     }
