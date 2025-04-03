@@ -1,11 +1,12 @@
 let count = 0;
 let pointsPerClick = 1;
 let autoClickers = 0;
+let doublePointsPurchased = 0;
 const maxPurchases = 50;
 
 const counter = document.getElementById("counter");
 const rocket = document.getElementById("rocket");
-const buyMorePerClick = document.getElementById("buyDoublePoints");
+const buyDoublePoints = document.getElementById("buyDoublePoints");
 const buyAutoClicker = document.getElementById("buyAutoClicker");
 const shop = document.getElementById("shop");
 const shopToggle = document.getElementById("shopToggle");
@@ -20,28 +21,28 @@ function updateCounter() {
 
 // Check if items in the shop can be purchased
 function checkShopItems() {
-    buyMorePerClick.disabled = count < 50 || buyMorePerClick >= maxPurchases;
+    buyDoublePoints.disabled = count < 50 || doublePointsPurchased >= maxPurchases;
     buyAutoClicker.disabled = count < 100 || autoClickers >= maxPurchases;
 }
 
-// Click event for the rocket (increments points)
+// Click event for the rocket (adds points per click)
 rocket.addEventListener("click", () => {
     count += pointsPerClick;
     updateCounter();
 });
 
-// Purchase Double Points
-buyMorePerClick.addEventListener("click", () => {
-    if (count >= 50 && buyMorePerClick < maxPurchases) {
+// Purchase Double Points (adds +1 per click)
+buyDoublePoints.addEventListener("click", () => {
+    if (count >= 50 && doublePointsPurchased < maxPurchases) {
         count -= 50;
-        pointsPerClick *= 2; // Double the points per click
-        buyMorePerClick++;
+        pointsPerClick += 1; // Increase points per click
+        doublePointsPurchased++;
         doublePointsCount.textContent = `${doublePointsPurchased}/50`;
         updateCounter();
     }
 });
 
-// Purchase Auto-Clicker
+// Purchase Auto-Clicker (adds auto points every second)
 buyAutoClicker.addEventListener("click", () => {
     if (count >= 100 && autoClickers < maxPurchases) {
         count -= 100;
@@ -49,7 +50,7 @@ buyAutoClicker.addEventListener("click", () => {
         autoClickerCount.textContent = `${autoClickers}/50`;
         updateCounter();
 
-        // Start auto-clicker (adds points every second)
+        // Start auto-clicker (adds points per second)
         setInterval(() => {
             count += pointsPerClick;
             updateCounter();
